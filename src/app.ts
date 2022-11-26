@@ -1,17 +1,18 @@
 import express, { request, Request, response, Response } from "express";
-import park from "./Router/park"
-
+import movie from "./Router/movie"
+import users from "./Router/users"
 
 const app = express();
 const port = 7000;
 
 app.use(express.json());
 
-app.use('/api/park',park);
-        
+app.use('/api/movie',movie);
+app.use('/api/users',users);
 
 
-app.listen(7000,()=>{
-    console.log(" app listening at 7000 http://localhost:${port}");
+
+app.listen(port,()=>{
+    console.log(` app listening at http://localhost:${port}`);
  
 })
