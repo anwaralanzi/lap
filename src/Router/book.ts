@@ -6,8 +6,8 @@ import {getallbooksScemah} from "../zodschima/zodSchema"
 const Router= express.Router();
 
 // get all books
-Router.get('./', getallbooks);
+Router.get('/', getallbooks);
 
-Router.post('./', Addbooks,validate(getallbooksScemah));
+Router.post('/', Addbooks,validate(getallbooksScemah));
 
 export default Router;
