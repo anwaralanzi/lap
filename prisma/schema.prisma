@@ -6,24 +6,24 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
-model User {
-  id       String @id @default(uuid())
-  username String @unique
-  password String
-  loan     loan[]
+model Student{
+  id String @id @default(uuid())
+  name String 
+  age String
+  major String
+  classroom Classroom[]
 }
 
-model books {
-  id    String @id @default(uuid())
-  name  String @unique
-  genre String
-  loan  loan[]
+model Classroom{
+  id String @id @default(uuid())
+  name String
+  student Student[]
+  teacher Teacher[]
 }
 
-model loan {
-  id     String @id @default(uuid())
-  userId String
-  bookID String
-  userid User   @relation(fields: [userId], references: [id])
-  bookid books  @relation(fields: [bookID], references: [id])
+model Teacher{
+  id String @id @default(uuid())
+  name String
+  classroom_id String
+  classroom Classroom @relation(fields: [classroom_id],references: [id])
 }

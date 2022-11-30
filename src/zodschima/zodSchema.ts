@@ -1,35 +1,41 @@
-import { z } from "zod";
+import { type } from "os";
+import { z ,TypeOf} from "zod";
 
-export const getallbooksScemah =z.object({
+export const getallTeacherScemah =z.object({
     body:z.object({
         name: z
         .string({ required_error: "name is required !" })
         .min(2, "name must be more than 2 Chars"),
-      genre: z
-        .string({ required_error: "genre is required !" })
-        .min(2, "genre must be more than 2 Chars"),
+  
     }),
 
 
     });
-    export const getalUsersScemah =z.object({
+    export type getallTeacherScemahType=TypeOf<typeof getallTeacherScemah >['body']
+    export const getallStudentScemah =z.object({
       body:z.object({
-          username: z
-          .string({ required_error: "name is required !" })
+          name: z
+          .string({ required_error: " student name is required !" })
           .min(2, "usernam must be more than 2 Chars"),
-        passowrd: z
+          major: z
           .string({ required_error: "genre is required !" })
           .min(2, "passowrd must be more than 2 Chars"),
+          age:z
+          .number({required_error:"age is required !"}),
       }),
   
-  
-      });
-      export const getallLoonsSchema =z.object({
-      body:z.object({
 
-        book_id: z.string({ required_error: "book id is required !" }),
-    user_id: z.string({ required_error: "user id is required !" }),
+      });
+      export type getallStudentScemahType=TypeOf<typeof getallStudentScemah >['body']
+
+      export const getallClassSchema =z.object({
+      body:z.object({
+        name:z
+        .string({required_error:'class name is required'}),
+
       }),
   
   
       });
+      export type getallClassSchemaType=TypeOf<typeof getallClassSchema >['body']
+
