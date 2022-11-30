@@ -6,24 +6,37 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
-model Student{
-  id String @id @default(uuid())
-  name String 
-  age String
+
+model classroomtostudent {
+  A String
+  B String
+
+  @@unique([A, B], map: "_ClassroomToStudent_AB_unique")
+  @@index([B], map: "_ClassroomToStudent_B_index")
+  @@map("_classroomtostudent")
+}
+
+model classroom {
+  id   String @id
+  name String
+}
+
+model student {
+  id    String @id
+  name  String
+  age   String
   major String
-  classroom Classroom[]
 }
 
-model Classroom{
-  id String @id @default(uuid())
-  name String
-  student Student[]
-  teacher Teacher[]
-}
-
-model Teacher{
-  id String @id @default(uuid())
-  name String
+model teacher {
+  id           String @id
+  name         String
   classroom_id String
-  classroom Classroom @relation(fields: [classroom_id],references: [id])
+}
+
+model user {
+  id       String @id @default(uuid())
+  username String @unique(map: "User_username_key")
+  password String
+  email    String @unique(map: "User_email_key")
 }

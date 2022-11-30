@@ -1,15 +1,13 @@
-import express from 'express';
-import { Request,Response,NextFunction } from 'express';
+import express  from "express";
+import { addTeacherHandler, getTeacherHandler ,getTeacherByIdHandler} from "../Controler/Teacher.controler";
+import validate from "../middlwehre/validate3";
+import { addTeacherSchema, getTeacherSchema } from "../zodschima/zodSchema";
 
-import {getallTeacher,AddTeacher,getTeacherByIdHandler}  from '../Controler/Teacher.controler';
-import validate from '../middlwehre/validate3';
-import {getallTeacherScemah} from "../zodschima/zodSchema"
-const Router= express.Router();
 
-// get all Teachers
-Router.get('/', getallTeacher);
+const routerTeacher = express.Router();
 
-Router.post('/', AddTeacher,validate(getallTeacherScemah));
-Router.get('/', getTeacherByIdHandler),validate(getallTeacherScemah);
+routerTeacher.get("/",getTeacherHandler)
+routerTeacher.post("/",validate(addTeacherSchema),addTeacherHandler)
+routerTeacher.get("/:id",validate(getTeacherSchema),getTeacherByIdHandler)
 
-export default Router;
+export default routerTeacher
